@@ -20,18 +20,18 @@ with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.3) a
         if not ret:
             break
 
-        # Processamento da imagem
+        #Processamento da imagem
         image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         image.flags.writeable = False
         results = hands.process(image)
         image.flags.writeable = True
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
-        # Captura e desenho de landmarks
+        #Captura e desenho de landmarks
         if results.multi_hand_landmarks:
             for num, hand_landmarks in enumerate(results.multi_hand_landmarks):
 
-                ## Definir rótulo para mão aberta/fechada
+                #Definir rótulo para mão aberta e fechada
                 hand_label = results.multi_handedness[num].classification[0].label
 
                 wrist = hand_landmarks.landmark[0]
@@ -54,12 +54,11 @@ with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.3) a
                 mp_drawing.draw_landmarks(
                     image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-                # Coleta das coordenadas e rótulo (mão aberta ou fechada)
+                #Coleta das coordenadas e rótulo
                 landmarks = [landmark for landmark in hand_landmarks.landmark]
                 flattened = [coord for landmark in landmarks for coord in (landmark.x, landmark.y, landmark.z)]
 
-                # Adicionar o rótulo junto com as coordenadas
-                data.append(flattened + [gesture])  # Adiciona o rótulo ao final das coordenadas
+                data.append(flattened + [gesture])
 
         cv2.imshow('Frame', image)
         if cv2.waitKey(10) & 0xFF == ord('q'):
@@ -68,6 +67,6 @@ with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.3) a
 cap.release()
 cv2.destroyAllWindows()
 
-# Agora você pode salvar os dados com os rótulos em um arquivo CSV
+##Salvar dados em arquivo CSV
 #df = pd.DataFrame(data, columns=[f'landmark_{i}_x' for i in range(21)] + [f'landmark_{i}_y' for i in range(21)] + [f'landmark_{i}_z' for i in range(21)] + ['gesture'])
 #df.to_csv('Exerc1.csv', index=False)
