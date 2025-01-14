@@ -10,7 +10,8 @@ mp_hands = mp.solutions.hands
 def calculate_distance(point1, point2):
     return math.sqrt((point1.x - point2.x)**2 + (point1.y - point2.y)**2 + (point1.z - point2.z)**2)
 
-cap = cv2.VideoCapture('DATA_SAMPLE/DATA6.mp4')
+#cap = cv2.VideoCapture('DATA_SAMPLE/DATA6.mp4')
+cap = cv2.VideoCapture(0)
 data = []
 
 with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.3) as hands:
@@ -68,5 +69,5 @@ cap.release()
 cv2.destroyAllWindows()
 
 # Agora você pode salvar os dados com os rótulos em um arquivo CSV
-df = pd.DataFrame(data, columns=[f'landmark_{i}_x' for i in range(21)] + [f'landmark_{i}_y' for i in range(21)] + [f'landmark_{i}_z' for i in range(21)] + ['gesture'])
-df.to_csv('Exerc1.csv', index=False)
+#df = pd.DataFrame(data, columns=[f'landmark_{i}_x' for i in range(21)] + [f'landmark_{i}_y' for i in range(21)] + [f'landmark_{i}_z' for i in range(21)] + ['gesture'])
+#df.to_csv('Exerc1.csv', index=False)
