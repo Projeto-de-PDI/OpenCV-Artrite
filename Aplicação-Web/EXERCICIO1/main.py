@@ -4,13 +4,13 @@ import numpy as np
 import joblib
 
 # Carregar modelo SaLVO
-model = joblib.load('C:/Users/jmarques/Desktop/UFMA/PDI/OpenCV-Artrite/EXERCICIO1/Modelo_Exercicio1.pkl')
+model = joblib.load('C:/Users/jmarques/Desktop/UFMA/PDI/OpenCV-Artrite/Aplicação-Web/EXERCICIO1/Modelo_Exercicio1.pkl')
 
 # Configurar MediaPipe
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
-cap = cv2.VideoCapture('C:/Users/jmarques/Desktop/UFMA/PDI/OpenCV-Artrite/EXERCICIO1/DATA_SAMPLE\DATA6.mp4')  # Pode ser substituído por 0 para webcam
+cap = cv2.VideoCapture('C:/Users/jmarques/Desktop/UFMA/PDI/OpenCV-Artrite/Aplicação-Web/EXERCICIO1/DATA_SAMPLE\DATA6.mp4')  # Pode ser substituído por 0 para webcam
 gestures_sequence = []
 
 with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5) as hands:
